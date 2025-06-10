@@ -19,7 +19,7 @@ const app = express();
 
 // Configure CORS properly
 const corsOptions = {
-  origin: 'http://localhost:3000', // Your frontend URL
+  origin: ['http://localhost:3000', 'https://ind1-mrjo.vercel.app'], // Your frontend URLs
   credentials: true, // Allow credentials (cookies, auth headers)
   optionsSuccessStatus: 200 // Some legacy browsers choke on 204
 };
