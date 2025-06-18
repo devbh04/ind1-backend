@@ -12,6 +12,8 @@ import mentorRouter from './v1/mentor.mjs';
 import hackathonRouter from './v1/hackathon.mjs';
 import courseRouter from "./v1/course.mjs";
 import hackathonCandidateRouter from "./v1/hackhathonCandidate.mjs";
+import searchRoutes from './v1/searchroutes.mjs'
+import paswordRoute from './v1/forgotpassword.mjs'
 
 dotenv.config();
 
@@ -41,6 +43,8 @@ app.use('/api/v1/mentors', mentorRouter);
 app.use('/api/v1/hackathons', hackathonRouter);
 app.use("/api/v1/courses", courseRouter);
 app.use("/api/v1/hackathoncandidate", hackathonCandidateRouter);
+app.use('/api/v1/search', searchRoutes);
+app.use('/api/v1', paswordRoute);
 
 // Start Server
 const PORT = process.env.PORT || 3001;

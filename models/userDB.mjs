@@ -1,6 +1,7 @@
 // models/userDB.mjs
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
+import crypto from 'crypto'
 
 const userSchema = new mongoose.Schema(
   {
@@ -35,6 +36,8 @@ const userSchema = new mongoose.Schema(
       required: true,
       minlength: 8,
     },
+    resetPasswordToken: String,
+    resetPasswordExpires: Date,
     // 🔥 Add this field
     postedInternships: [
       {
@@ -89,6 +92,11 @@ userSchema.pre("save", async function (next) {
 // Method to compare passwords
 userSchema.methods.comparePassword = async function (candidatePassword) {
   return await bcrypt.compare(candidatePassword, this.password);
+};
+
+userSchema.methods.generatePasswordReset = function () {
+  this.resetPasswordToken = crypto.randomBytes(32).toString("hex");
+  this.resetPasswordExpires = Date.now() + 3600000; // 1 hour
 };
 
 export const User = mongoose.model("User", userSchema);
